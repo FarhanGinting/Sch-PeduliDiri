@@ -22,10 +22,10 @@ class CatatanController extends Controller
         $catatan = Catatan::all();
         return view('perjalanan.table', ['catatanList' => $catatan]);
     }
-    public function details($slug)
+    public function details($id, $nama)
     {
-        
-        return view('perjalanan.details', compact('slug'));
+        $catatanDetails = Catatan::findOrFail($id);
+        return view('perjalanan.details', ['catatanDetail' => $catatanDetails], compact('nama'));
     }
 
     /**

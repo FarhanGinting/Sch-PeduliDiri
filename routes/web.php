@@ -15,7 +15,7 @@ use Illuminate\Support\Facades\Route;
 */
 
 Route::resource('/', CatatanController::class);
-Route::get('/details/{id}', [CatatanController::class, 'details']);
+Route::get('/details/{id}/{nama}', [CatatanController::class, 'details']);
 Route::get('/table', [CatatanController::class, 'showtable']);
 Route::get('add', [CatatanController::class, 'create'])->name('perjalanan.add');
 Route::post('store', [CatatanController::class, 'store']);

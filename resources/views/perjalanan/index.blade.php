@@ -72,11 +72,11 @@
                     <div class="col-lg-3">
                         <div class="item">
 
-                            <a href="/details/{{ $item->id }}">
+                            <a href="/details/{{ $item->id }}/{{ Str::slug($item->nama, '-') }}">
                                 <img src="{{ asset('storage/foto/'.$item->image) }}" alt="" class="img-fluid " >
                             </a>
                             <div class="info">
-                                <a href="/details/{{ $item->id }}">
+                                <a href="/details/{{ $item->id }}/{{ Str::slug($item->nama, '-') }}">
                                     <h3 class="small-header mb-2">
                                         {{ $item->nama }}
                                     </h3>

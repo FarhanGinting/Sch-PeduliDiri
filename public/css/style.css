@@ -5,6 +5,8 @@
     --softgray: #F3F5F7;
     --softgray2: #CCD8E1;
     --gray: #727379;
+    --yellow: #FFCA2C;
+    --red: #DC3545;
     --fwbold: 700;
     --fwextrabold: 800;
     --fwsemibold: 600;
@@ -113,6 +115,24 @@ input.form-control {
     border: 0;
     background: var(--blue);
     color: var(--white);
+    font-weight: var(--fwbold);
+}
+
+.btn-warning {
+    padding: 14px 24px 14px 24px;
+    border-radius: 50px;
+    border: 0;
+    background: var(--yellow);
+    color: var(--navy);
+    font-weight: var(--fwbold);
+}
+
+.btn-danger {
+    padding: 14px 24px 14px 24px;
+    border-radius: 50px;
+    border: 0;
+    background: var(--red);
+    color: var(--navy);
     font-weight: var(--fwbold);
 }
 
