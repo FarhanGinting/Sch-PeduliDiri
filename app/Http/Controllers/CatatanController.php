@@ -22,6 +22,13 @@ class CatatanController extends Controller
         $catatan = Catatan::all();
         return view('perjalanan.table', ['catatanList' => $catatan]);
     }
+
+    public function showimage()
+    {
+        $catatan = Catatan::all();
+        return view('perjalanan.image-list', ['catatanList' => $catatan]);
+    }
+
     public function details($id, $nama)
     {
         $catatanDetails = Catatan::findOrFail($id);
@@ -90,6 +97,22 @@ class CatatanController extends Controller
         $deleteCatatan = Catatan::findOrFail($id);
         $deleteCatatan->delete();
 
+        return redirect('/');
+    }
+
+    public function showdeleted()
+    {
+        $deleteCatatan = Catatan::onlyTrashed()->get();
+        return view('perjalanan.delete-list', ['catatan' => $deleteCatatan]);
+    }
+
+    public function restore($id)
+    {
+        $deleteCatatan = Catatan::withTrashed()->where('id', $id)->restore();
+        // if ($deleteCatatan) {
+        //     Session::flash('status', 'Success');
+        //     Session::flash('message', 'Restore Successfully created ! ');
+        // }
         return redirect('/');
     }
 }
