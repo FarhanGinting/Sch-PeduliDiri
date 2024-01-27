@@ -73,7 +73,13 @@
                         <div class="item">
 
                             <a href="/details/{{ $item->id }}/{{ Str::slug($item->nama, '-') }}">
-                                <img src="{{ asset('storage/foto/'.$item->image) }}" alt="" class="img-fluid " >
+
+                                @if ($item->image != '')
+                                    <img src="{{ asset('storage/foto/' . $item->image) }}" alt=""
+                                        class="img-fluid" >
+                                @else
+                                    <img src="{{ asset('images/image-not.png') }}" alt="" class="img-fluid">
+                                @endif
                             </a>
                             <div class="info">
                                 <a href="/details/{{ $item->id }}/{{ Str::slug($item->nama, '-') }}">

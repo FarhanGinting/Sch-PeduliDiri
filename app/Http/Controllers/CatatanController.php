@@ -85,8 +85,11 @@ class CatatanController extends Controller
     /**
      * Remove the specified resource from storage.
      */
-    public function destroy(Catatan $catatan)
+    public function destroy($id)
     {
-        //
+        $deleteCatatan = Catatan::findOrFail($id);
+        $deleteCatatan->delete();
+
+        return redirect('/');
     }
 }

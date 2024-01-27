@@ -4,7 +4,7 @@
     @include('components.navbar')
     <section class="house-details pb-5">
         <div class="container">
-            <div class="row align-items-center mb-30">
+            <div class="row align-items-center mb-8">
                 <div class="col-lg-6">
                     <h1 class="jumbo-header">
                         {{ $nama }}
@@ -16,40 +16,40 @@
                 <div class="col-lg-6 header">
 
                     <h3 class="small-header">
-                        {{ $catatanDetail->suhu }}
+                        {{ $catatanDetail->suhu }}°C
                     </h3>
                     <div class="rating">
                         🌡️
                     </div>
                 </div>
             </div>
-            <div class="row gallery">
+            <div class="row gallery justify-content-center">
                 <div class="col-lg-6 mb-5">
                     <img src="{{ asset('storage/foto/' . $catatanDetail->image) }}" class="img-fluid" alt="">
                 </div>
             </div>
-            <div class="row house-informations">
+            <div class="row house-informations justify-content-center">
                 <div class="col-lg-7">
 
-                    <h3 class="small-header mb-4">
+                    <h3 class="small-header mb-4 ">
                         Keterangan
                     </h3>
                     <div class="row features">
                         <div class="col-lg-10">
-                            <div class="row">
+                            <div class="row ">
                                 <div class="col-lg-6">
-                                    <img src="{{ asset('images  /ic_wifi.svg') }}" class="icon" alt="">
+                                    <img src="{{ asset('images/date.png') }}" class="icon" alt="">
                                     <div class="info">
-                                        <h3 class="small-header mb-0">
+                                        <h3 class="small-header mt-4">
                                             {{ $catatanDetail->tanggal }}
                                         </h3>
 
                                     </div>
                                 </div>
                                 <div class="col-lg-6">
-                                    <img src="{{ asset('images  /ic_card.svg') }}" class="icon" alt="">
+                                    <img src="{{ asset('images/time.png') }}" class="icon" alt="">
                                     <div class="info">
-                                        <h3 class="small-header mb-5">
+                                        <h3 class="small-header mt-4">
                                             {{ $catatanDetail->waktu }}
                                         </h3>
 
@@ -61,7 +61,7 @@
                     </div>
                 </div>
                 <div class="col-lg-7">
-                    <h3 class="small-header mb-2">
+                    <h3 class="small-header mb-2 mt-4">
                         Aksi
                     </h3>
                     <div class="row features">
@@ -74,7 +74,11 @@
                                 </div>
                                 <div class="col-lg-4">
                                     <div class="info">
-                                        <button type="submit" class="btn btn-danger w-100 mt-3">Hapus</button>
+                                        <form action="/destroy/{{ $catatanDetail->id }}" method="POST">
+                                            @csrf
+                                            @method('delete')
+                                            <button class="btn btn-danger w-100 mt-3" type="submit">Delete</button>
+                                        </form>
                                     </div>
                                 </div>
                                 <div class="col-lg-4">
