@@ -12,7 +12,7 @@ return new class extends Migration
     public function up(): void
     {
         Schema::table('catatan', function (Blueprint $table) {
-            $table->foreign('user_id')->references('id')->on('users')->onDelete('restrict');
+            $table->foreign('user_id')->references('nik')->on('users')->onDelete('restrict');
         });
     }
 
@@ -22,7 +22,7 @@ return new class extends Migration
     public function down(): void
     {
         Schema::table('catatan', function (Blueprint $table) {
-            $table->dropForeign('user_id');
+            $table->dropForeign(['user_id']);
         });
     }
 };

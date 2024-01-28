@@ -5,6 +5,8 @@ namespace App\Http\Controllers;
 use App\Models\Catatan;
 use App\Models\User;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Auth;
+use Illuminate\Support\Facades\Storage;
 
 class CatatanController extends Controller
 {
@@ -13,7 +15,13 @@ class CatatanController extends Controller
      */
     public function index()
     {
-        $catatan = Catatan::all();
+        // Mendapatkan pengguna yang sedang login
+        $user = Auth::user();
+
+        // Mengambil catatan perjalanan berdasarkan nik pengguna yang login
+        $catatan = Catatan::where('user_id', $user->nik)->get();
+
+        // Mengirimkan data catatan ke view
         return view('perjalanan.index', ['catatanList' => $catatan]);
     }
 
@@ -40,8 +48,11 @@ class CatatanController extends Controller
      */
     public function create()
     {
-        $catatan = User::select('id', 'nama')->get();
-        return view('perjalanan.add', ['catatan' => $catatan]);
+        // Mendapatkan user yang sedang login
+        $user = Auth::user();
+
+        // Mengirimkan NIK user yang sedang login ke view
+        return view('perjalanan.add', ['nik' => $user->nik]);
     }
 
     /**
@@ -87,15 +98,28 @@ class CatatanController extends Controller
      */
     public function update(Request $request, $id)
     {
-        $newName = '';
-        if ($request->file('foto')) {
+        $catatan = Catatan::findOrFail($id);
+
+        // Jika ada foto baru yang diunggah
+        if ($request->hasFile('foto')) {
+            // Hapus foto lama jika ada
+            if ($catatan->image) {
+                Storage::delete('foto/' . $catatan->image);
+            }
+
             $extension = $request->file('foto')->getClientOriginalExtension();
             $newName = $request->name . '-' . now()->timestamp . '.' . $extension;
+
+            // Simpan foto baru
             $request->file('foto')->storeAs('foto', $newName);
+
+            // Set nama foto baru pada request
+            $request['image'] = $newName;
         }
-        $request['image'] = $newName;
-        $catatan = Catatan::findOrFail($id);
+
+        // Lakukan update data catatan
         $catatan->update($request->all());
+
         return redirect('/');
     }
 

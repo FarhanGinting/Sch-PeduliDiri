@@ -6,13 +6,14 @@
         <div class="container">
             <div class="row align-items-center">
                 <div class="col-lg-6">
+                    
                     <h1 class="jumbo-header mb-30">
                         Catat Perjalanan<br>
                         Cepat & Mudah
                     </h1>
                     <p class="paragraph mb-30">
                         Catat Perjalanan Tanpa Batas, Cepat, dan <br>Mudah Bersama Layanan Kami!
-
+                        
                     </p>
                     <p class="mb-50"><a href="{{ route('perjalanan.add') }}" class="btn btn-primary">Buat Catatan
                             Perjalanan</a></p>
@@ -29,18 +30,18 @@
                         </div>
                         <div class="col-lg-4 item">
                             <h3 class="big-header">
-                                $
+                                Welcome
                             </h3>
                             <p class="paragraph">
-                                Tempat
+                                 {{ Auth::user()->nama }}
                             </p>
                         </div>
                         <div class="col-lg-4 item">
                             <h3 class="big-header">
-                                $
+                                Email
                             </h3>
                             <p class="paragraph">
-                                Orang
+                                {{ Auth::user()->email }}
                             </p>
                         </div>
                     </div>

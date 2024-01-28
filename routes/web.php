@@ -2,6 +2,7 @@
 
 use App\Http\Controllers\CatatanController;
 use Illuminate\Support\Facades\Route;
+use App\Http\Controllers\AuthController;
 
 /*
 |--------------------------------------------------------------------------
@@ -14,15 +15,20 @@ use Illuminate\Support\Facades\Route;
 |
 */
 
-Route::resource('/', CatatanController::class);
-Route::get('/details/{id}/{nama}', [CatatanController::class, 'details'])->name('details');
-Route::get('table/delete/{id}', [CatatanController::class, 'delete']);
-Route::delete('/destroy/{id}', [CatatanController::class, 'destroy']);
-Route::get('/table', [CatatanController::class, 'showtable'])->name('table');
-Route::get('/image', [CatatanController::class, 'showimage'])->name('image');
-Route::get('/showdeleted', [CatatanController::class, 'showdeleted'])->name('showdeleted');
-Route::get('/{id}/restore', [CatatanController::class, 'restore']);
-Route::get('add', [CatatanController::class, 'create'])->name('perjalanan.add');
-Route::post('store', [CatatanController::class, 'store']);
-Route::get('/details/{id}/{nama}/edit', [CatatanController::class, 'edit']);
-Route::put('/details/{id}/{nama}/update', [CatatanController::class, 'update']);
+Route::resource('/', CatatanController::class)->middleware('auth');
+
+Route::get('/login', [AuthController::class, 'login'])->name('login')->middleware('guest');
+Route::post('/login', [AuthController::class, 'authenticating'])->middleware('guest');
+Route::get('/logout', [AuthController::class, 'logout'])->middleware('auth');
+
+Route::get('/details/{id}/{nama}', [CatatanController::class, 'details'])->name('details')->middleware('auth');
+Route::get('table/delete/{id}', [CatatanController::class, 'delete'])->middleware('auth');
+Route::delete('/destroy/{id}', [CatatanController::class, 'destroy'])->middleware('auth');
+Route::get('/table', [CatatanController::class, 'showtable'])->name('table')->middleware('auth');
+Route::get('/image', [CatatanController::class, 'showimage'])->name('image')->middleware('auth');
+Route::get('/showdeleted', [CatatanController::class, 'showdeleted'])->name('showdeleted')->middleware('auth');
+Route::get('/{id}/restore', [CatatanController::class, 'restore'])->middleware('auth');
+Route::get('add', [CatatanController::class, 'create'])->name('perjalanan.add')->middleware('auth');
+Route::post('store', [CatatanController::class, 'store'])->middleware('auth');
+Route::get('/details/{id}/{nama}/edit', [CatatanController::class, 'edit'])->middleware('auth');
+Route::put('/details/{id}/{nama}/update', [CatatanController::class, 'update'])->middleware('auth');
