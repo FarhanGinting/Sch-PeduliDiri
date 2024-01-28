@@ -22,9 +22,9 @@
                         <td>{{ $data->lokasi }}</td>
                         <td>{{ $data->tanggal }}</td>
                         <td>
-                            <a href="student-detail/{{ $data->id }}">Detail</a> |
-                            <a href="student-edit/{{ $data->id }}"> Edit</a> |
-                            <a href="student-delete/{{ $data->id }}"> Delete</a>
+                            <a href="/details/{{ $data->id }}/{{ Str::slug($data->nama, '-') }}">Detail</a> |
+                            <a href=""> Edit</a> |
+                            <a href="table/delete/{{ $data->id }}"> Delete</a>
                         </td>
                     </tr>
                 @endforeach

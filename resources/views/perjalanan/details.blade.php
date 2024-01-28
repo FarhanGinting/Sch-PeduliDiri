@@ -83,7 +83,7 @@
                                 </div>
                                 <div class="col-lg-4">
                                     <div class="info">
-                                        <button type="submit" class="btn btn-warning w-100 mt-3">Edit Data</button>
+                                        <a href="/details/{{ $catatanDetail->id }}/{{ Str::slug($catatanDetail->nama, '-') }}/edit" type="submit" class="btn btn-warning w-100 mt-3">Edit Data</a>
                                     </div>
                                 </div>
                             </div>

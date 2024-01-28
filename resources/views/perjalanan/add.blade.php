@@ -56,7 +56,7 @@
 
                             <div class="col-12">
                                 <label class="form-label">Foto</label>
-                                <input type="file" name="foto" class="form-control" id="foto" required>
+                                <input type="file" name="foto" class="form-control" id="foto">
                             </div>
                             
                             <div class="d-flex justify-content-center column-gap-4 mt-5 mb-4">

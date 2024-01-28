@@ -41,7 +41,7 @@ class CatatanController extends Controller
     public function create()
     {
         $catatan = User::select('id', 'nama')->get();
-        return view('perjalanan.add',  ['catatan' => $catatan]);
+        return view('perjalanan.add', ['catatan' => $catatan]);
     }
 
     /**
@@ -51,9 +51,9 @@ class CatatanController extends Controller
     {
         $newName = '';
         if ($request->file('foto')) {
-        $extension = $request->file('foto')->getClientOriginalExtension();
-        $newName = $request->name . '-' . now()->timestamp . '.' . $extension;
-        $request->file('foto')->storeAs('foto', $newName);
+            $extension = $request->file('foto')->getClientOriginalExtension();
+            $newName = $request->name . '-' . now()->timestamp . '.' . $extension;
+            $request->file('foto')->storeAs('foto', $newName);
         }
         $request['image'] = $newName;
         $catatan = Catatan::create($request->all());
@@ -61,7 +61,7 @@ class CatatanController extends Controller
         //     Session::flash('status', 'Success');
         //     Session::flash('message', 'Add New Catatan Successfully created ! ');
         // }
-        
+
         return redirect('/');
     }
 
@@ -76,22 +76,39 @@ class CatatanController extends Controller
     /**
      * Show the form for editing the specified resource.
      */
-    public function edit(Catatan $catatan)
+    public function edit(Request $request, $id)
     {
-        //
+        $catatan = Catatan::findOrFail($id);
+        return view('perjalanan.edit', ['catatan' => $catatan]);
     }
 
     /**
      * Update the specified resource in storage.
      */
-    public function update(Request $request, Catatan $catatan)
+    public function update(Request $request, $id)
     {
-        //
+        $newName = '';
+        if ($request->file('foto')) {
+            $extension = $request->file('foto')->getClientOriginalExtension();
+            $newName = $request->name . '-' . now()->timestamp . '.' . $extension;
+            $request->file('foto')->storeAs('foto', $newName);
+        }
+        $request['image'] = $newName;
+        $catatan = Catatan::findOrFail($id);
+        $catatan->update($request->all());
+        return redirect('/');
     }
 
     /**
      * Remove the specified resource from storage.
      */
+    public function delete($id)
+    {
+        $Confirmcatatan = Catatan::findOrFail($id);
+        return view('perjalanan.delete', ['catatan' => $Confirmcatatan]);
+
+    }
+
     public function destroy($id)
     {
         $deleteCatatan = Catatan::findOrFail($id);
