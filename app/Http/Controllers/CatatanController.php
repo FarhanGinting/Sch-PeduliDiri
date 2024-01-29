@@ -2,14 +2,15 @@
 
 namespace App\Http\Controllers;
 
+use Carbon\Carbon;
 use App\Models\User;
 use App\Models\Catatan;
 use Illuminate\Http\Request;
+use Barryvdh\DomPDF\Facade\Pdf;
 use Illuminate\Support\Facades\Auth;
-use Illuminate\Support\Facades\Storage;
 use Intervention\Image\ImageManager;
+use Illuminate\Support\Facades\Storage;
 use Intervention\Image\Drivers\Gd\Driver;
-
 
 class CatatanController extends Controller
 {
@@ -17,25 +18,41 @@ class CatatanController extends Controller
      * Display a listing of the resource.
      */
     public function index(Request $request)
-{
-    // Mendapatkan pengguna yang sedang login
-    $user = Auth::user();
+    {
+        // Mendapatkan pengguna yang sedang login
+        $user = Auth::user();
 
-    // Mengambil catatan perjalanan berdasarkan nik pengguna yang login
-    $keyword = $request->keyword;
+        // Mengambil catatan perjalanan berdasarkan nik pengguna yang login
+        $keyword = $request->keyword;
 
-    $catatan = Catatan::where('user_id', $user->nik)
-        ->where(function ($query) use ($keyword) {
-            $query->where('nama', 'LIKE', '%' . $keyword . '%')
-                ->orWhere('lokasi', 'LIKE', '%' . $keyword . '%')
-                ->orWhere('tanggal', 'LIKE', '%' . $keyword . '%');
-        })
-        ->get();
+        $catatan = Catatan::where('user_id', $user->nik)
+            ->where(function ($query) use ($keyword) {
+                $query->where('nama', 'LIKE', '%' . $keyword . '%')
+                    ->orWhere('lokasi', 'LIKE', '%' . $keyword . '%')
+                    ->orWhere('tanggal', 'LIKE', '%' . $keyword . '%');
+            })
+            ->get();
 
-    // Mengirimkan data catatan ke view
-    return view('perjalanan.index', ['catatanList' => $catatan, 'keyword' => $keyword]);
-}
+        // Mengirimkan data catatan ke view
+        return view('perjalanan.index', ['catatanList' => $catatan, 'keyword' => $keyword]);
+    }
 
+    public function exportPdf()
+    {
+        $user = Auth::user();
+        $catatanexport = Catatan::where('user_id', $user->nik)->get();
+        $pdf = Pdf::loadView('pdf.export-catatan', ['catatanexport' => $catatanexport]);
+        return $pdf->download('export-catatan'.Carbon::now()->timestamp.'.pdf');
+    }
+
+    public function exportPdfDetails($id, $nama)
+    {
+        $catatanexport = Catatan::findOrFail($id);
+        $pdf = Pdf::loadView('pdf.export-catatan-details', ['catatanDetail' => $catatanexport], compact('nama'));
+        return $pdf->download('export-catatan-details'.Carbon::now()->timestamp.'.pdf');
+    }
+
+    
 
     public function showtable()
     {
@@ -76,20 +93,18 @@ class CatatanController extends Controller
     {
         $save_url = '';
         if ($request->file('foto')) {
-            $manager = New ImageManager(new Driver());
+            $manager = new ImageManager(new Driver());
             $extension = $request->file('foto')->getClientOriginalExtension();
             $newName = $request->name . '-' . now()->timestamp . '.' . $extension;
             $img = $manager->read($request->file('foto'));
-            $img = $img->resize(1920,1080);
+            $img = $img->resize(1920, 1080);
 
-            $img->toJpeg(80)->save(base_path('public/uploads/perjalanan'. $newName));
-            $save_url = 'uploads/perjalanan'. $newName;
+            $img->toJpeg(80)->save(base_path('public/uploads/perjalanan' . $newName));
+            $save_url = 'uploads/perjalanan' . $newName;
         }
-            $request['image'] = $save_url;
-            $catatan = Catatan::create($request->all());
-       
-        
-    
+        $request['image'] = $save_url;
+        $catatan = Catatan::create($request->all());
+
         return redirect('/');
     }
 
@@ -123,17 +138,17 @@ class CatatanController extends Controller
             if ($catatan->image) {
                 Storage::delete('foto/' . $catatan->image);
             }
-            $manager = New ImageManager(new Driver());
+            $manager = new ImageManager(new Driver());
             $extension = $request->file('foto')->getClientOriginalExtension();
             $newName = $request->name . '-' . now()->timestamp . '.' . $extension;
             $img = $manager->read($request->file('foto'));
-            $img = $img->resize(1920,1080);
+            $img = $img->resize(1920, 1080);
 
-            $img->toJpeg(80)->save(base_path('public/uploads/perjalanan'. $newName));
-            $save_url = 'uploads/perjalanan'. $newName;
+            $img->toJpeg(80)->save(base_path('public/uploads/perjalanan' . $newName));
+            $save_url = 'uploads/perjalanan' . $newName;
             // Set nama foto baru pada request
             $request['image'] = $save_url;
-            
+
         }
         // Lakukan update data catatan
         $catatan->update($request->all());

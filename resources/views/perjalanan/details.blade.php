@@ -72,12 +72,12 @@
                     <div class="row features">
                         <div class="col-lg-10">
                             <div class="row">
-                                <div class="col-lg-4">
+                                <div class="col-lg-3">
                                     <div class="info">
                                         <a href="{{ route('index') }}" class="btn btn-secondary w-100 mt-3">Kembali</a>
                                     </div>
                                 </div>
-                                <div class="col-lg-4">
+                                <div class="col-lg-3">
                                     <div class="info">
                                         <form action="/destroy/{{ $catatanDetail->id }}" method="POST">
                                             @csrf
@@ -86,10 +86,16 @@
                                         </form>
                                     </div>
                                 </div>
-                                <div class="col-lg-4">
+                                <div class="col-lg-3">
                                     <div class="info">
                                         <a href="/details/{{ $catatanDetail->id }}/{{ Str::slug($catatanDetail->nama, '-') }}/edit"
                                             type="submit" class="btn btn-warning w-100 mt-3">Edit Data</a>
+                                    </div>
+                                </div>
+                                <div class="col-lg-3">
+                                    <div class="info">
+                                        <a href="/details/{{ $catatanDetail->id }}/{{ Str::slug($catatanDetail->nama, '-') }}/export-pdf"
+                                            type="submit" class="btn btn-primary w-100 mt-3">Export PDF</a>
                                     </div>
                                 </div>
                             </div>

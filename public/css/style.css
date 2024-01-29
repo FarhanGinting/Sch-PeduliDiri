@@ -7,6 +7,7 @@
     --gray: #727379;
     --yellow: #FFCA2C;
     --red: #DC3545;
+    --lightblue: #0DCAF0;
     --fwbold: 700;
     --fwextrabold: 800;
     --fwsemibold: 600;
@@ -132,6 +133,15 @@ input.form-control {
     border-radius: 50px;
     border: 0;
     background: var(--red);
+    color: var(--navy);
+    font-weight: var(--fwbold);
+}
+
+.btn-info {
+    padding: 14px 24px 14px 24px;
+    border-radius: 50px;
+    border: 0;
+    background: var(--lightblue);
     color: var(--navy);
     font-weight: var(--fwbold);
 }

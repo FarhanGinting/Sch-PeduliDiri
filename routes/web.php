@@ -26,6 +26,8 @@ Route::post('/register', [AuthController::class, 'store'])->middleware('guest');
 
 
 Route::get('/details/{id}/{nama}', [CatatanController::class, 'details'])->name('details')->middleware('auth');
+Route::get('/details/{id}/{nama}/export-pdf', [CatatanController::class, 'exportPdfDetails'])->middleware('auth');
+Route::get('table/export-pdf', [CatatanController::class, 'exportPdf'])->middleware('auth');
 Route::get('table/delete/{id}', [CatatanController::class, 'delete'])->middleware('auth');
 Route::delete('/destroy/{id}', [CatatanController::class, 'destroy'])->middleware('auth');
 Route::get('/table', [CatatanController::class, 'showtable'])->name('table')->middleware('auth');
