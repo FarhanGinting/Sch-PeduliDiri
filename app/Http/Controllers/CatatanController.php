@@ -2,38 +2,52 @@
 
 namespace App\Http\Controllers;
 
-use App\Models\Catatan;
 use App\Models\User;
+use App\Models\Catatan;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Storage;
+use Intervention\Image\ImageManager;
+use Intervention\Image\Drivers\Gd\Driver;
+
 
 class CatatanController extends Controller
 {
     /**
      * Display a listing of the resource.
      */
-    public function index()
-    {
-        // Mendapatkan pengguna yang sedang login
-        $user = Auth::user();
+    public function index(Request $request)
+{
+    // Mendapatkan pengguna yang sedang login
+    $user = Auth::user();
 
-        // Mengambil catatan perjalanan berdasarkan nik pengguna yang login
-        $catatan = Catatan::where('user_id', $user->nik)->get();
+    // Mengambil catatan perjalanan berdasarkan nik pengguna yang login
+    $keyword = $request->keyword;
 
-        // Mengirimkan data catatan ke view
-        return view('perjalanan.index', ['catatanList' => $catatan]);
-    }
+    $catatan = Catatan::where('user_id', $user->nik)
+        ->where(function ($query) use ($keyword) {
+            $query->where('nama', 'LIKE', '%' . $keyword . '%')
+                ->orWhere('lokasi', 'LIKE', '%' . $keyword . '%')
+                ->orWhere('tanggal', 'LIKE', '%' . $keyword . '%');
+        })
+        ->get();
+
+    // Mengirimkan data catatan ke view
+    return view('perjalanan.index', ['catatanList' => $catatan, 'keyword' => $keyword]);
+}
+
 
     public function showtable()
     {
-        $catatan = Catatan::all();
+        $user = Auth::user();
+        $catatan = Catatan::where('user_id', $user->nik)->get();
         return view('perjalanan.table', ['catatanList' => $catatan]);
     }
 
     public function showimage()
     {
-        $catatan = Catatan::all();
+        $user = Auth::user();
+        $catatan = Catatan::where('user_id', $user->nik)->get();
         return view('perjalanan.image-list', ['catatanList' => $catatan]);
     }
 
@@ -60,19 +74,22 @@ class CatatanController extends Controller
      */
     public function store(Request $request)
     {
-        $newName = '';
+        $save_url = '';
         if ($request->file('foto')) {
+            $manager = New ImageManager(new Driver());
             $extension = $request->file('foto')->getClientOriginalExtension();
             $newName = $request->name . '-' . now()->timestamp . '.' . $extension;
-            $request->file('foto')->storeAs('foto', $newName);
-        }
-        $request['image'] = $newName;
-        $catatan = Catatan::create($request->all());
-        // if ($catatan) {
-        //     Session::flash('status', 'Success');
-        //     Session::flash('message', 'Add New Catatan Successfully created ! ');
-        // }
+            $img = $manager->read($request->file('foto'));
+            $img = $img->resize(1920,1080);
 
+            $img->toJpeg(80)->save(base_path('public/uploads/perjalanan'. $newName));
+            $save_url = 'uploads/perjalanan'. $newName;
+        }
+            $request['image'] = $save_url;
+            $catatan = Catatan::create($request->all());
+       
+        
+    
         return redirect('/');
     }
 
@@ -106,20 +123,20 @@ class CatatanController extends Controller
             if ($catatan->image) {
                 Storage::delete('foto/' . $catatan->image);
             }
-
+            $manager = New ImageManager(new Driver());
             $extension = $request->file('foto')->getClientOriginalExtension();
             $newName = $request->name . '-' . now()->timestamp . '.' . $extension;
+            $img = $manager->read($request->file('foto'));
+            $img = $img->resize(1920,1080);
 
-            // Simpan foto baru
-            $request->file('foto')->storeAs('foto', $newName);
-
+            $img->toJpeg(80)->save(base_path('public/uploads/perjalanan'. $newName));
+            $save_url = 'uploads/perjalanan'. $newName;
             // Set nama foto baru pada request
-            $request['image'] = $newName;
+            $request['image'] = $save_url;
+            
         }
-
         // Lakukan update data catatan
         $catatan->update($request->all());
-
         return redirect('/');
     }
 
@@ -143,7 +160,8 @@ class CatatanController extends Controller
 
     public function showdeleted()
     {
-        $deleteCatatan = Catatan::onlyTrashed()->get();
+        $user = Auth::user();
+        $deleteCatatan = Catatan::where('user_id', $user->nik)->onlyTrashed()->get();
         return view('perjalanan.delete-list', ['catatan' => $deleteCatatan]);
     }
 

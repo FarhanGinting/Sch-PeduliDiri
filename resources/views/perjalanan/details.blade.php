@@ -25,9 +25,14 @@
             </div>
             <div class="row gallery justify-content-center">
                 <div class="col-lg-6 mb-5">
-                    <img src="{{ asset('storage/foto/' . $catatanDetail->image) }}" class="img-fluid" alt="">
+                    @if ($catatanDetail->image != '')
+                        <img src="{{ asset($catatanDetail->image) }}" class="img-fluid" alt="">
+                    @else
+                        <img src="{{ asset('images/image-not.png') }}" class="img-fluid" alt="">
+                    @endif
                 </div>
             </div>
+            
             <div class="row house-informations justify-content-center">
                 <div class="col-lg-7">
 
@@ -83,7 +88,8 @@
                                 </div>
                                 <div class="col-lg-4">
                                     <div class="info">
-                                        <a href="/details/{{ $catatanDetail->id }}/{{ Str::slug($catatanDetail->nama, '-') }}/edit" type="submit" class="btn btn-warning w-100 mt-3">Edit Data</a>
+                                        <a href="/details/{{ $catatanDetail->id }}/{{ Str::slug($catatanDetail->nama, '-') }}/edit"
+                                            type="submit" class="btn btn-warning w-100 mt-3">Edit Data</a>
                                     </div>
                                 </div>
                             </div>

@@ -67,6 +67,14 @@
                     </p>
                 </div>
             </div>
+            <div class="my-3 mb-5 d-flex justify-content-end">
+                <form action="" method="get">
+                    <div class="input-group mb-3">
+                        <input type="text" class="form-control" name="keyword" placeholder="Search">
+                        <button class="input-group-text btn btn-warning">🔍</button>
+                    </div>
+                </form>
+            </div>
             <div class="row">
 
                 @foreach ($catatanList as $item)
@@ -76,7 +84,7 @@
                             <a href="/details/{{ $item->id }}/{{ Str::slug($item->nama, '-') }}">
 
                                 @if ($item->image != '')
-                                    <img src="{{ asset('storage/foto/' . $item->image) }}" alt=""
+                                    <img src="{{$item->image }}" alt=""
                                         class="img-fluid" >
                                 @else
                                     <img src="{{ asset('images/image-not.png') }}" alt="" class="img-fluid">
