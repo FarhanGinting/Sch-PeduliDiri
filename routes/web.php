@@ -21,6 +21,10 @@ Route::get('/login', [AuthController::class, 'login'])->name('login')->middlewar
 Route::post('/login', [AuthController::class, 'authenticating'])->middleware('guest');
 Route::get('/logout', [AuthController::class, 'logout'])->middleware('auth');
 
+Route::get('/register', [AuthController::class, 'register'])->middleware('guest');
+Route::post('/register', [AuthController::class, 'store'])->middleware('guest');
+
+
 Route::get('/details/{id}/{nama}', [CatatanController::class, 'details'])->name('details')->middleware('auth');
 Route::get('table/delete/{id}', [CatatanController::class, 'delete'])->middleware('auth');
 Route::delete('/destroy/{id}', [CatatanController::class, 'destroy'])->middleware('auth');

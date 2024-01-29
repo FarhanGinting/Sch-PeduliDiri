@@ -2,6 +2,7 @@
 
 namespace App\Http\Controllers;
 
+use App\Models\User;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
 
@@ -41,5 +42,14 @@ class AuthController extends Controller
         $request->session()->invalidate();
         $request->session()->regenerateToken();
         return redirect('/login');
+    }
+
+    public function register(){
+        return view('perjalanan.register');
+    }
+
+    public function store(Request $request){
+        $User = User::create($request->all());
+        return redirect('/');
     }
 }
