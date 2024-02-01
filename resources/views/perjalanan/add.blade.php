@@ -13,6 +13,15 @@
                         <h5 class="card-title mt-3 mb-4">Form Perjalanan</h5>
 
                         <!-- Vertical Form -->
+                        @if ($errors->any())
+                            <div class="alert alert-danger">
+                                <ul>
+                                    @foreach ($errors->all() as $error)
+                                        <li>{{ $error }}</li>
+                                    @endforeach
+                                </ul>
+                            </div>
+                        @endif
                         <form method="POST" action="store" class="row g-3 " enctype="multipart/form-data">
                             @csrf
 
@@ -20,10 +29,11 @@
                                 <label class="form-label">NIK</label>
                                 <div class="input-group has-validation">
                                     <span class="input-group-text" id="inputGroupPrepend">👤</span>
-                                    <input type="text" name="user_id" id="class_id" class="form-control" value="{{ $nik }}" readonly>
+                                    <input type="text" name="user_id" id="class_id" class="form-control"
+                                        value="{{ $nik }}" readonly>
                                 </div>
                             </div>
-                            
+
                             <div class="col-12">
                                 <label class="form-label">Nama Perjalanan</label>
                                 <input type="text" name="nama" class="form-control" id="nama" required>

@@ -2,6 +2,7 @@
 
 namespace App\Http\Controllers;
 
+use App\Http\Requests\CatatanCreateRequest;
 use Carbon\Carbon;
 use App\Models\User;
 use App\Models\Catatan;
@@ -90,7 +91,7 @@ class CatatanController extends Controller
     /**
      * Store a newly created resource in storage.
      */
-    public function store(Request $request)
+    public function store(CatatanCreateRequest $request)
     {
         $save_url = '';
         if ($request->file('foto')) {
