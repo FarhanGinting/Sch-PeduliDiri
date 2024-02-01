@@ -16,7 +16,5 @@
             @else
             @endif
         @endforeach
-
-        <!-- Tambahkan elemen gambar lain jika perlu -->
     </div>
 @endsection

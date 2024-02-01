@@ -73,6 +73,11 @@
                         <input type="text" class="form-control" name="keyword" placeholder="Search">
                         <button class="input-group-text btn btn-warning">🔍</button>
                     </div>
+                    @if (Session::has('status'))
+                    <div class="alert alert-success" role="alert">
+                        {{ Session::get('message') }}
+                    </div>
+                @endif
                 </form>
             </div>
             <div class="row">

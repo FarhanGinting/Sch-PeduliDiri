@@ -9,6 +9,7 @@ use Illuminate\Http\Request;
 use Barryvdh\DomPDF\Facade\Pdf;
 use Illuminate\Support\Facades\Auth;
 use Intervention\Image\ImageManager;
+use Illuminate\Support\Facades\Session;
 use Illuminate\Support\Facades\Storage;
 use Intervention\Image\Drivers\Gd\Driver;
 
@@ -104,7 +105,8 @@ class CatatanController extends Controller
         }
         $request['image'] = $save_url;
         $catatan = Catatan::create($request->all());
-
+        Session::flash('status', 'Success');
+        Session::flash('message', 'Success Successfully uploaded');
         return redirect('/');
     }
 
@@ -152,6 +154,8 @@ class CatatanController extends Controller
         }
         // Lakukan update data catatan
         $catatan->update($request->all());
+        Session::flash('status', 'success');
+        Session::flash('message', 'Success Update Data');
         return redirect('/');
     }
 
@@ -169,7 +173,8 @@ class CatatanController extends Controller
     {
         $deleteCatatan = Catatan::findOrFail($id);
         $deleteCatatan->delete();
-
+        Session::flash('status', 'Success');
+        Session::flash('message', 'Success Deleted Data');
         return redirect('/');
     }
 
@@ -183,10 +188,10 @@ class CatatanController extends Controller
     public function restore($id)
     {
         $deleteCatatan = Catatan::withTrashed()->where('id', $id)->restore();
-        // if ($deleteCatatan) {
-        //     Session::flash('status', 'Success');
-        //     Session::flash('message', 'Restore Successfully created ! ');
-        // }
+        if ($deleteCatatan) {
+            Session::flash('status', 'Success');
+            Session::flash('message', 'Success Restore Data');
+        }
         return redirect('/');
     }
 }
