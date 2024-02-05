@@ -16,24 +16,23 @@ use Illuminate\Support\Facades\Route;
 |
  */
 
+Route::resource('/auth', AuthController::class);
 
-Route::get('/login', [AuthController::class, 'login'])->name('login')->middleware('guest');
-Route::post('/login', [AuthController::class, 'authenticating'])->middleware('guest');
-Route::get('/logout', [AuthController::class, 'logout'])->middleware('auth');
-
-Route::get('/register', [AuthController::class, 'register'])->middleware('guest');
-Route::post('/register', [AuthController::class, 'store'])->middleware('guest');
+Route::middleware(['guest'])->group(function () {
+    Route::post('/login', [AuthController::class, 'authenticating'])->name('auth.authenticating');
+});
 
 // Group routes for Auth
 Route::middleware(['auth'])->group(function () {
     Route::get('/', [CatatanController::class, 'index'])->name('index');
+    Route::get('/logout', [AuthController::class, 'logout'])->name('auth.logout');
     Route::resource('/catatan', CatatanController::class);
-    
+
     //Setup Route to view Table
     Route::get('/table', [CatatanController::class, 'showtable'])->name('catatan.table');
     Route::get('/image', [CatatanController::class, 'showimage'])->name('catatan.image');
     Route::get('/delete/{id}', [CatatanController::class, 'delete'])->name('catatan.delete');
-    
+
     //Setup Route to view Delete List
     Route::get('/showdeleted', [CatatanController::class, 'showdeleted'])->name('catatan.showdeleted');
     Route::get('/restore/{id}', [CatatanController::class, 'restore'])->name('catatan.restore');

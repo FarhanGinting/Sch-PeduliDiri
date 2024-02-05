@@ -23,8 +23,8 @@ class CatatanCreateRequest extends FormRequest
     {
         return [
             'nama' => 'unique:catatan|max:16',
-            'alamat' => 'max:50'
-
+            'alamat' => 'max:50',
+            'suhu' => 'integer|between:-99,99',
         ];
     }
 
@@ -33,7 +33,9 @@ class CatatanCreateRequest extends FormRequest
         return [
             'nama.max' => 'Nama Perjalanan Melebihi Batas :max',
             'nama.unique' => 'Nama Perjalanan Tidak Boleh Sama',
-
+            'suhu.integer' => 'Suhu harus berupa bilangan bulat.',
+            'suhu.between' => 'Suhu harus berada dalam rentang -99 hingga 99.',
         ];
     }
+
 }

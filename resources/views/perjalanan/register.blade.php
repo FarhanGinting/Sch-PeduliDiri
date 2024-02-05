@@ -13,7 +13,7 @@
                                     <h5 class="card-title text-center pb-0 fs-4">Daftar Membuat Akun Anda</h5>
                                     <p class="text-center small">Isi email, nama dan password untuk daftar</p>
                                 </div>
-                                <form class="row g-3 needs-validation" form role="form" method="POST">
+                                <form class="row g-3 needs-validation" action="{{ route('auth.store') }}" form role="form" method="POST">
                                     @csrf
                                     <!-- Add this input field to your registration form -->
                                     <div class="form-group">
@@ -51,7 +51,7 @@
                                     </div>
                                 </form>
                                 <p class="text-center small mt-2">
-                                    <a href="/" class="">Punya Akun Masuk Sekarang</a>
+                                    <a href="{{ route('auth.index') }}" class="">Punya Akun Masuk Sekarang</a>
                                 </p>
 
                             </div>

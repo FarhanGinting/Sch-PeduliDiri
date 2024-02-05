@@ -42,7 +42,7 @@
                                     <h5 class="card-title text-center pb-0 fs-4">Masuk Dengan Akun Anda</h5>
                                     <p class="text-center small">Isi email dan password untuk login</p>
                                 </div>
-                                <form class="row g-3 needs-validation" form role="form" method="POST">
+                                <form class="row g-3 needs-validation" action="{{ route('auth.authenticating') }}" form role="form" method="POST">
                                     @csrf
                                     <div class="col-12">
                                         <label for="email" class="form-label">Email</label>
@@ -65,7 +65,7 @@
                                     </div>
                                 </form>
                                 <p class="text-center small mt-2">
-                                    <a href="/register" class="">Tidak Punya Akun Register Sekarang</a>
+                                    <a href="{{ route('auth.create') }}" class="">Tidak Punya Akun Register Sekarang</a>
                                 </p>
 
                             </div>

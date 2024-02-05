@@ -126,7 +126,7 @@ class CatatanController extends Controller
     /**
      * Update the specified resource in storage.
      */
-    public function update(Request $request, $id)
+    public function update(CatatanCreateRequest $request, $id)
     {
         $catatan = Catatan::findOrFail($id);
 
