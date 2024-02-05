@@ -8,10 +8,34 @@
                 <div class="row justify-content-center">
                     <div class="col-lg-4 col-md-6 d-flex flex-column align-items-center justify-content-center">
                         @if (Session::has('status'))
-                        <div class="alert alert-danger" role="alert">
-                            {{ Session::get('message') }}
-                        </div>
-                    @endif
+                            <!-- Modal -->
+                            <div class="modal fade" id="statusModal" tabindex="-1" aria-labelledby="statusModalLabel"
+                                aria-hidden="true">
+                                <div class="modal-dialog">
+                                    <div class="modal-content">
+                                        <div class="modal-header">
+                                            <h5 class="modal-title" id="statusModalLabel">Status</h5>
+                                            <button type="button" class="btn-close" data-bs-dismiss="modal"
+                                                aria-label="Close"></button>
+                                        </div>
+                                        <div class="modal-body text-center">
+                                            {{ Session::get('message') }}
+                                            @if (Session::get('status') === 'failed')
+                                                <img src="images/alert.gif" alt="Alert GIF" width="65%" class="mx-auto">
+                                            @elseif (Session::get('status') === 'success')
+                                                <img src="images/double-check.gif" alt="Double Check GIF" width="65%"
+                                                    class="mx-auto">
+                                            @endif
+                                        </div>
+                                        <div class="modal-footer">
+                                            <button type="button" class="btn btn-secondary"
+                                                data-bs-dismiss="modal">Tutup</button>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        @endif
+
                         <div class="card mb-3">
                             <div class="card-body">
                                 <div class="pt-4 pb-2">

@@ -6,22 +6,21 @@
         <div class="container">
             <div class="row align-items-center">
                 <div class="col-lg-6">
-                    
+
                     <h1 class="jumbo-header mb-30">
                         Catat Perjalanan<br>
                         Cepat & Mudah
                     </h1>
                     <p class="paragraph mb-30">
                         Catat Perjalanan Tanpa Batas, Cepat, dan <br>Mudah Bersama Layanan Kami!
-                        
+
                     </p>
-                    <p class="mb-50"><a href="{{ route('perjalanan.add') }}" class="btn btn-primary">Buat Catatan
+                    <p class="mb-50"><a href="{{ route('catatan.create') }}" class="btn btn-primary">Buat Catatan
                             Perjalanan</a></p>
                     <div class="row stats text-center">
                         <div class="col-lg-4 item">
                             <h3 class="big-header">
-                                @foreach ($catatanList as $key => $item)
-                                @endforeach
+
                                 {{ count($catatanList) }}
                             </h3>
                             <p class="paragraph">
@@ -33,7 +32,7 @@
                                 Welcome
                             </h3>
                             <p class="paragraph">
-                                 {{ Auth::user()->nama }}
+                                {{ Auth::user()->nama }}
                             </p>
                         </div>
                         <div class="col-lg-4 item">
@@ -74,10 +73,34 @@
                         <button class="input-group-text btn btn-warning">🔍</button>
                     </div>
                     @if (Session::has('status'))
-                    <div class="alert alert-success" role="alert">
-                        {{ Session::get('message') }}
-                    </div>
-                @endif
+                        <!-- Modal -->
+                        <div class="modal fade" id="statusModal" tabindex="-1" aria-labelledby="statusModalLabel"
+                            aria-hidden="true">
+                            <div class="modal-dialog">
+                                <div class="modal-content">
+                                    <div class="modal-header">
+                                        <h5 class="modal-title" id="statusModalLabel">Status</h5>
+                                        <button type="button" class="btn-close" data-bs-dismiss="modal"
+                                            aria-label="Close"></button>
+                                    </div>
+                                    <div class="modal-body text-center">
+                                        {{ Session::get('message') }}
+                                        @if (Session::get('status') === 'failed')
+                                            <img src="images/alert.gif" alt="Alert GIF" width="65%" class="mx-auto">
+                                        @elseif (Session::get('status') === 'success')
+                                            <img src="images/double-check.gif" alt="Double Check GIF" width="65%"
+                                                class="mx-auto">
+                                        @endif
+                                    </div>
+                                    <div class="modal-footer">
+                                        <button type="button" class="btn btn-secondary"
+                                            data-bs-dismiss="modal">Tutup</button>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    @endif
+
                 </form>
             </div>
             <div class="row">
@@ -86,17 +109,16 @@
                     <div class="col-lg-3">
                         <div class="item">
 
-                            <a href="/details/{{ $item->id }}/{{ Str::slug($item->nama, '-') }}">
+                            <a href="{{ route('catatan.show', $item->id) }}">
 
                                 @if ($item->image != '')
-                                    <img src="{{$item->image }}" alt=""
-                                        class="img-fluid" >
+                                    <img src="{{ $item->image }}" alt="" class="img-fluid">
                                 @else
                                     <img src="{{ asset('images/image-not.png') }}" alt="" class="img-fluid">
                                 @endif
                             </a>
                             <div class="info">
-                                <a href="/details/{{ $item->id }}/{{ Str::slug($item->nama, '-') }}">
+                                <a href="{{ route('catatan.show', $item->id) }}">
                                     <h3 class="small-header mb-2">
                                         {{ $item->nama }}
                                     </h3>

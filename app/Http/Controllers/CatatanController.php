@@ -47,10 +47,10 @@ class CatatanController extends Controller
         return $pdf->download('export-catatan'.Carbon::now()->timestamp.'.pdf');
     }
 
-    public function exportPdfDetails($id, $nama)
+    public function exportPdfDetails($id)
     {
         $catatanexport = Catatan::findOrFail($id);
-        $pdf = Pdf::loadView('pdf.export-catatan-details', ['catatanDetail' => $catatanexport], compact('nama'));
+        $pdf = Pdf::loadView('pdf.export-catatan-details', ['catatanDetail' => $catatanexport]);
         return $pdf->download('export-catatan-details'.Carbon::now()->timestamp.'.pdf');
     }
 
@@ -68,12 +68,6 @@ class CatatanController extends Controller
         $user = Auth::user();
         $catatan = Catatan::where('user_id', $user->nik)->get();
         return view('perjalanan.image-list', ['catatanList' => $catatan]);
-    }
-
-    public function details($id, $nama)
-    {
-        $catatanDetails = Catatan::findOrFail($id);
-        return view('perjalanan.details', ['catatanDetail' => $catatanDetails], compact('nama'));
     }
 
     /**
@@ -114,9 +108,10 @@ class CatatanController extends Controller
     /**
      * Display the specified resource.
      */
-    public function show(Catatan $catatan)
+    public function show($id)
     {
-        //
+        $catatanDetails = Catatan::findOrFail($id);
+        return view('perjalanan.details', ['catatanDetail' => $catatanDetails]);
     }
 
     /**

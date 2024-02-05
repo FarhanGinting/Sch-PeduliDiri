@@ -12,7 +12,7 @@
                         <h5 class="card-title mt-3 mb-4">Edit Data Perjalanan</h5>
 
                         <!-- Vertical Form -->
-                        <form method="POST" action="/details/{{ $catatan->id }}/{{ $catatan->nama }}/update" class="row g-3 " enctype="multipart/form-data">
+                        <form method="POST" action="{{ route('catatan.update', $catatan->id) }}" class="row g-3 " enctype="multipart/form-data">
                             @csrf
                             @method('put')
                             <div class="col-12">

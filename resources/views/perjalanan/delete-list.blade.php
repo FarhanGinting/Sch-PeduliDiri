@@ -22,7 +22,7 @@
                         <td>{{ $data->lokasi }}</td>
                         <td>{{ $data->deleted_at }}</td>
                         <td>
-                            <a href="/{{ $data->id }}/restore">Restore</a>
+                            <a href="{{ route('catatan.restore', $data->id) }}">Restore</a>
                         </td>
                     </tr>
                 @endforeach

@@ -32,7 +32,7 @@ class AuthController extends Controller
             return redirect()->intended('/');
         }
         Session::flash('status', 'failed');
-        Session::flash('message', 'Login WRONG');
+        Session::flash('message', 'Salah Memasukkan Email & Password');
         return redirect('/login');
 
     }

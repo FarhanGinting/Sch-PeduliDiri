@@ -17,7 +17,7 @@
                         </div>
                         <div class="col-lg-3">
                             <div class="info">
-                                <form action="/destroy/{{ $catatan->id }}" method="POST">
+                                <form action="{{ route('catatan.destroy', $catatan->id) }}" method="POST">
                                     @csrf
                                     @method('delete')
                                     <button class="btn btn-danger w-100 mt-3" type="submit">Delete</button>

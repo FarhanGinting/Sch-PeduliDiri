@@ -22,7 +22,7 @@
                                 </ul>
                             </div>
                         @endif
-                        <form method="POST" action="store" class="row g-3 " enctype="multipart/form-data">
+                        <form method="POST" action="{{ route('catatan.store') }}" class="row g-3 " enctype="multipart/form-data">
                             @csrf
 
                             <div class="col-12">

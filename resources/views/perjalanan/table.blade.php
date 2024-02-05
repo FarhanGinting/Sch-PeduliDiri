@@ -23,9 +23,9 @@
                         <td>{{ $data->lokasi }}</td>
                         <td>{{ $data->tanggal }}</td>
                         <td>
-                            <a href="/details/{{ $data->id }}/{{ Str::slug($data->nama, '-') }}">Detail</a> |
-                            <a href=""> Edit</a> |
-                            <a href="table/delete/{{ $data->id }}"> Delete</a>
+                            <a href="{{ route('catatan.show', $data->id) }}">Detail</a> 
+                            |
+                            <a href="{{ route('catatan.delete', $data->id) }}"> Delete</a>
                             
                         </td>
                     </tr>

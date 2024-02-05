@@ -6,7 +6,7 @@
             <div class="row align-items-center mb-8">
                 <div class="col-lg-6">
                     <h1 class="jumbo-header">
-                        {{ $nama }}
+                        {{ $catatanDetail->nama }}
                     </h1>
                     <p class="paragraph">
                         {{ $catatanDetail->lokasi }}

@@ -7,7 +7,7 @@
             <div class="row align-items-center mb-8">
                 <div class="col-lg-6">
                     <h1 class="jumbo-header">
-                        {{ $nama }}
+                        {{ $catatanDetail->nama }}
                     </h1>
                     <p class="paragraph">
                         {{ $catatanDetail->lokasi }}
@@ -79,7 +79,7 @@
                                 </div>
                                 <div class="col-lg-3">
                                     <div class="info">
-                                        <form action="/destroy/{{ $catatanDetail->id }}" method="POST">
+                                        <form action="{{ route('catatan.destroy', $catatanDetail->id) }}" method="POST">
                                             @csrf
                                             @method('delete')
                                             <button class="btn btn-danger w-100 mt-3" type="submit">Delete</button>
@@ -88,13 +88,13 @@
                                 </div>
                                 <div class="col-lg-3">
                                     <div class="info">
-                                        <a href="/details/{{ $catatanDetail->id }}/{{ Str::slug($catatanDetail->nama, '-') }}/edit"
+                                        <a href="{{ route('catatan.edit', $catatanDetail->id) }}"
                                             type="submit" class="btn btn-warning w-100 mt-3">Edit Data</a>
                                     </div>
                                 </div>
                                 <div class="col-lg-3">
                                     <div class="info">
-                                        <a href="/details/{{ $catatanDetail->id }}/{{ Str::slug($catatanDetail->nama, '-') }}/export-pdf"
+                                        <a href="{{ route('catatan.export-details', $catatanDetail->id) }}"
                                             type="submit" class="btn btn-primary w-100 mt-3">Export PDF</a>
                                     </div>
                                 </div>

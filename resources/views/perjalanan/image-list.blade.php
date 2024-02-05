@@ -8,7 +8,7 @@
             @if ($item->image != '')
                 <div class="col-lg-4 mb-4">
                     <div class="gallery-item">
-                        <a href="/details/{{ $item->id }}/{{ Str::slug($item->nama, '-') }}">
+                        <a href="{{ route('catatan.show', $item->id) }}">
                         <img src="{{ $item->image }}" class="img-fluid" alt="">
                         </a>
                     </div>

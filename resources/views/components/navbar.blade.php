@@ -14,13 +14,13 @@
                     <a class="nav-link {{ request()->is('/') ? 'active' : '' }}" aria-current="page" href="{{ route('index') }}">Home</a>
                 </li>
                 <li class="nav-item">
-                    <a class="nav-link {{ request()->is('table') ? 'active' : '' }}" href="{{ route('table') }}">Table</a>
+                    <a class="nav-link {{ request()->is('table') ? 'active' : '' }}" href="{{ route('catatan.table') }}">Table</a>
                 </li>
                 <li class="nav-item">
-                    <a class="nav-link {{ request()->is('image') ? 'active' : '' }}" href="{{ route('image') }}">Galeri Foto</a>
+                    <a class="nav-link {{ request()->is('image') ? 'active' : '' }}" href="{{ route('catatan.image') }}">Galeri Foto</a>
                 </li>
                 <li class="nav-item">
-                    <a class="nav-link {{ request()->is('showdeleted') ? 'active' : '' }}" href="{{ route('showdeleted') }}">Histori Hapus</a>
+                    <a class="nav-link {{ request()->is('showdeleted') ? 'active' : '' }}" href="{{ route('catatan.showdeleted') }}">Histori Hapus</a>
                 </li>                
             </ul>
             <ul class="navbar-nav mb-2 mb-lg-0">

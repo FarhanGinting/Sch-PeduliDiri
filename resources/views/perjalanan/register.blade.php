@@ -51,7 +51,7 @@
                                     </div>
                                 </form>
                                 <p class="text-center small mt-2">
-                                    <a href="" class="">Tidak Punya Akun Register Sekarang</a>
+                                    <a href="/" class="">Punya Akun Masuk Sekarang</a>
                                 </p>
 
                             </div>
