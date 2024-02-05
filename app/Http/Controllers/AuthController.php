@@ -36,7 +36,7 @@ class AuthController extends Controller
         }
         Session::flash('status', 'failed');
         Session::flash('message', 'Salah Memasukkan Email & Password');
-        return redirect('/login');
+        return redirect()->route('auth.index');
 
     }
 

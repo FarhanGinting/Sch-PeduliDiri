@@ -4,7 +4,7 @@ namespace App\Http\Requests;
 
 use Illuminate\Foundation\Http\FormRequest;
 
-class CatatanCreateRequest extends FormRequest
+class UpdateCatatanCreateRequest extends FormRequest
 {
     /**
      * Determine if the user is authorized to make this request.
@@ -22,7 +22,7 @@ class CatatanCreateRequest extends FormRequest
     public function rules(): array
     {
         return [
-            'nama' => 'unique:catatan|max:24',
+            'nama' => 'max:24',
             'alamat' => 'max:50',
             'suhu' => 'integer|between:-99,99',
         ];
@@ -32,10 +32,9 @@ class CatatanCreateRequest extends FormRequest
     {
         return [
             'nama.max' => 'Nama Perjalanan Melebihi Batas :max',
-            'nama.unique' => 'Nama Perjalanan Tidak Boleh Sama',
+            
             'suhu.integer' => 'Suhu harus berupa bilangan bulat.',
             'suhu.between' => 'Suhu harus berada dalam rentang -99 hingga 99.',
         ];
     }
-
 }

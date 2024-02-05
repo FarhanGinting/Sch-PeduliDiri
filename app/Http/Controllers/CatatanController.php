@@ -3,6 +3,7 @@
 namespace App\Http\Controllers;
 
 use App\Http\Requests\CatatanCreateRequest;
+use App\Http\Requests\UpdateCatatanCreateRequest;
 use Carbon\Carbon;
 use App\Models\User;
 use App\Models\Catatan;
@@ -26,7 +27,7 @@ class CatatanController extends Controller
 
         // Mengambil catatan perjalanan berdasarkan nik pengguna yang login
         $keyword = $request->keyword;
-
+        $totalCatatan = Catatan::count();
         $catatan = Catatan::where('user_id', $user->nik)
             ->where(function ($query) use ($keyword) {
                 $query->where('nama', 'LIKE', '%' . $keyword . '%')
@@ -36,7 +37,7 @@ class CatatanController extends Controller
             ->get();
 
         // Mengirimkan data catatan ke view
-        return view('perjalanan.index', ['catatanList' => $catatan, 'keyword' => $keyword]);
+        return view('perjalanan.index', ['catatanList' => $catatan, 'keyword' => $keyword, 'totalCatatan' => $totalCatatan]);
     }
 
     public function exportPdf()
@@ -126,7 +127,7 @@ class CatatanController extends Controller
     /**
      * Update the specified resource in storage.
      */
-    public function update(CatatanCreateRequest $request, $id)
+    public function update(UpdateCatatanCreateRequest $request, $id)
     {
         $catatan = Catatan::findOrFail($id);
 

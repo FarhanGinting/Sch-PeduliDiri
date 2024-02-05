@@ -21,7 +21,7 @@
                         <div class="col-lg-4 item">
                             <h3 class="big-header">
 
-                                {{ count($catatanList) }}
+                                {{ $totalCatatan }}
                             </h3>
                             <p class="paragraph">
                                 Catatan
@@ -69,7 +69,7 @@
             <div class="my-3 mb-5 d-flex justify-content-end">
                 <form action="" method="get">
                     <div class="input-group mb-3">
-                        <input type="text" class="form-control" name="keyword" placeholder="Search">
+                        <input type="text" class="form-control" name="keyword" placeholder="Nama, Lokasi, Tanggal">
                         <button class="input-group-text btn btn-warning">🔍</button>
                     </div>
                     @if (Session::has('status'))
@@ -85,12 +85,7 @@
                                     </div>
                                     <div class="modal-body text-center">
                                         {{ Session::get('message') }}
-                                        @if (Session::get('status') === 'failed')
-                                            <img src="images/alert.gif" alt="Alert GIF" width="65%" class="mx-auto">
-                                        @elseif (Session::get('status') === 'success')
-                                            <img src="images/double-check.gif" alt="Double Check GIF" width="65%"
-                                                class="mx-auto">
-                                        @endif
+                                            <img src="images/double-check.gif" alt="Alert GIF" width="65%" class="mx-auto">
                                     </div>
                                     <div class="modal-footer">
                                         <button type="button" class="btn btn-secondary"
