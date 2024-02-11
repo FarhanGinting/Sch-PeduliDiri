@@ -61,8 +61,7 @@
                         Perjalanan Anda
                     </h3>
                     <p class="paragraph">
-                        Perjalanan Terbanyak Anda: Merentasi Batas, Menjelajahi Keindahan Dunia Bersama Kenangan Tak
-                        Terlupakan!
+                        Data perjalanan Anda akan aman dan tersimpan selamanya. Jaga kenangan perjalanan Anda dengan menyimpan data perjalanan Anda dengan aman dan terjamin.
                     </p>
                 </div>
             </div>

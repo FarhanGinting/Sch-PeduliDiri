@@ -100,7 +100,7 @@ class AuthController extends Controller
         }
 
         // Cek apakah password diisi atau tidak
-        if ($request->has('password')) {
+        if ($request->filled('password')) {
             // Update password dengan bcrypt
             $user->password = bcrypt($request->password);
         }
@@ -108,8 +108,17 @@ class AuthController extends Controller
         // Lakukan update data pengguna tanpa memperbarui password
         $user->update($request->except(['password', 'photo']));
 
-        Session::flash('status', 'success');
-        Session::flash('message', 'Success Update Data');
+        // Flash message sesuai kondisi
+        $flashStatus = 'success';
+        $flashMessage = 'Success Update Data';
+
+        if ($request->filled('password')) {
+            // Password diubah, tambahkan pesan
+            $flashMessage .= ' and Password';
+        }
+
+        Session::flash('status', $flashStatus);
+        Session::flash('message', $flashMessage);
         return redirect('/');
     }
 
