@@ -141,5 +141,5 @@
             </div>
         </div>
     </section>
-
+    @include('components.footer')
 @endsection

@@ -24,10 +24,17 @@ class CatatanController extends Controller
     {
         // Mendapatkan pengguna yang sedang login
         $user = Auth::user();
-
+    
         // Mengambil catatan perjalanan berdasarkan nik pengguna yang login
         $keyword = $request->keyword;
-        $totalCatatan = Catatan::count();
+        $totalCatatan = Catatan::where('user_id', $user->nik)
+            ->where(function ($query) use ($keyword) {
+                $query->where('nama', 'LIKE', '%' . $keyword . '%')
+                    ->orWhere('lokasi', 'LIKE', '%' . $keyword . '%')
+                    ->orWhere('tanggal', 'LIKE', '%' . $keyword . '%');
+            })
+            ->count();
+    
         $catatan = Catatan::where('user_id', $user->nik)
             ->where(function ($query) use ($keyword) {
                 $query->where('nama', 'LIKE', '%' . $keyword . '%')
@@ -35,10 +42,11 @@ class CatatanController extends Controller
                     ->orWhere('tanggal', 'LIKE', '%' . $keyword . '%');
             })
             ->get();
-
+    
         // Mengirimkan data catatan ke view
         return view('perjalanan.index', ['catatanList' => $catatan, 'keyword' => $keyword, 'totalCatatan' => $totalCatatan]);
     }
+    
 
     public function exportPdf()
     {

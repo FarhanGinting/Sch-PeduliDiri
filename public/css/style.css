@@ -16,6 +16,7 @@
     --fwlight: 300;
 }
 
+
 body {
     font-family: 'Poppins', sans-serif;
 }
@@ -232,6 +233,27 @@ transition: all 0.3s ease;
     padding: 30px;
     border: 1px solid var(--softgray2);
     border-radius: 16px;
+}
+
+.login-image {
+    object-fit: cover;
+    height: 100%; /* Menyesuaikan tinggi gambar sesuai dengan kolom */
+    width: 100%; /* Menyesuaikan lebar gambar sesuai dengan kolom */
+    border-radius: 20px; /* Sesuaikan nilai border-radius sesuai keinginan Anda */
+    overflow: hidden; /* Menghindari adanya sudut gambar yang melebihi batas bulatan */
+    
+}
+.main {
+    flex: 1;
+}
+
+.footer {
+    background-color: #F3F5F7;
+    text-align: center;
+    padding: 1rem;
+    position: sticky;
+    bottom: 0;
+    width: 100%;
 }
 
 .house-details .house-informations .booking .item .title {
