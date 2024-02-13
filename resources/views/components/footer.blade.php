@@ -1,4 +1,4 @@
-<footer class="footer text-gray-700">
+<footer class="text-gray-700" style="background-color: white;">
         <!-- Start footer copyright -->
         <div class="footer-dark">
             <div class="container xl:max-w-6xl mx-auto px-4 py-4 border-t border-gray-200 border-opacity-10">

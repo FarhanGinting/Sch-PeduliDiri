@@ -200,18 +200,19 @@ box-shadow: 10px 10px 63px 0px rgba(199,205,227,0.65);
 transition: all 0.3s ease;
 }
 
-.best-items .item .info .footer .location {
+.best-items .item .info .footer-card .location {
     float: left; 
 }
 
-.best-items .item .info .footer .price {
+.best-items .item .info .footer-card .price {
     float: right; 
 }
 
-.best-items .item .info .footer .price p {
+.best-items .item .info .footer-card .price p {
     color: var(--blue);
     font-weight: var(--fwbold);
 }
+
 
 .house-details .header .rating {
     float: right;

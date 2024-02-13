@@ -214,6 +214,15 @@ transition: all 0.3s ease;
     font-weight: var(--fwbold);
 }
 
+.footerweb {
+    background-color: #FFFFFF;
+    text-align: center;
+    padding: 1rem;
+    position: sticky;
+    bottom: 0;
+    width: 100%;
+}
+
 .house-details .header .rating {
     float: right;
 }
@@ -247,14 +256,7 @@ transition: all 0.3s ease;
     flex: 1;
 }
 
-.footer {
-    background-color: #F3F5F7;
-    text-align: center;
-    padding: 1rem;
-    position: sticky;
-    bottom: 0;
-    width: 100%;
-}
+
 
 .house-details .house-informations .booking .item .title {
 

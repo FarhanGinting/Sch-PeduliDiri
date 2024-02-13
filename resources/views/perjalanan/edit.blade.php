@@ -11,15 +11,7 @@
                     <div class="card-body">
                         <h5 class="card-title mt-3 mb-4">Edit Data Perjalanan</h5>
 
-                        @if ($errors->any())
-                            <div class="alert alert-danger">
-                                <ul>
-                                    @foreach ($errors->all() as $error)
-                                        <li>{{ $error }}</li>
-                                    @endforeach
-                                </ul>
-                            </div>
-                        @endif
+                        
                         <!-- Vertical Form -->
                         <form method="POST" action="{{ route('catatan.update', $catatan->id) }}" class="row g-3 "
                             enctype="multipart/form-data">
@@ -27,15 +19,22 @@
                             @method('put')
                             <div class="col-12">
                                 <label class="form-label">Nama Perjalanan</label>
-                                <input type="text" name="nama" class="form-control" id="nama"
+                                <input type="text" name="nama"
+                                    class="form-control {{ $errors->has('nama') ? 'is-invalid' : '' }}" id="nama"
                                     value="{{ $catatan->nama }}" required>
-
+                                @if ($errors->has('nama'))
+                                    <p class="text-danger">{{ $errors->first('nama') }}</p>
+                                @endif
                             </div>
 
                             <div class="col-12">
                                 <label class="form-label">Tanggal</label>
-                                <input type="date" name="tanggal" class="form-control" id="tanggal"
+                                <input type="date" name="tanggal"
+                                    class="form-control {{ $errors->has('tanggal') ? 'is-invalid' : '' }}" id="tanggal"
                                     value="{{ $catatan->tanggal }}" required>
+                                @if ($errors->has('tanggal'))
+                                    <p class="text-danger">{{ $errors->first('tanggal') }}</p>
+                                @endif
                             </div>
 
                             <div class="col-12">
@@ -46,14 +45,22 @@
 
                             <div class="col-12">
                                 <label class="form-label">Lokasi</label>
-                                <input type="text" name="lokasi" class="form-control" id="lokasi"
+                                <input type="text" name="lokasi"
+                                    class="form-control {{ $errors->has('lokasi') ? 'is-invalid' : '' }}" id="lokasi"
                                     value="{{ $catatan->lokasi }}" required>
+                                @if ($errors->has('lokasi'))
+                                    <p class="text-danger">{{ $errors->first('lokasi') }}</p>
+                                @endif
                             </div>
 
                             <div class="col-12">
                                 <label class="form-label">Suhu °C</label>
-                                <input type="number" name="suhu" class="form-control" id="suhu"
+                                <input type="number" name="suhu"
+                                    class="form-control {{ $errors->has('suhu') ? 'is-invalid' : '' }}" id="suhu"
                                     value="{{ $catatan->suhu }}" required>
+                                @if ($errors->has('suhu'))
+                                    <p class="text-danger">{{ $errors->first('suhu') }}</p>
+                                @endif
                             </div>
 
                             <div class="col-12">

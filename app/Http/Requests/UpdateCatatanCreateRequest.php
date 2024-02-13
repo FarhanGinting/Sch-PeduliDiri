@@ -23,7 +23,8 @@ class UpdateCatatanCreateRequest extends FormRequest
     {
         return [
             'nama' => 'max:24',
-            'alamat' => 'max:50',
+            'lokasi' => 'max:50',
+            'tanggal' => 'before_or_equal:' . now(),
             'suhu' => 'integer|between:-99,99',
         ];
     }
@@ -32,7 +33,8 @@ class UpdateCatatanCreateRequest extends FormRequest
     {
         return [
             'nama.max' => 'Nama Perjalanan Melebihi Batas :max',
-            
+            'lokasi.max' => 'Lokasi Perjalanan Melebihi Batas :max',
+            'tanggal.before_or_equal' => 'Tanggal Tidak Boleh Lebih Dari Tanggal Sekarang',
             'suhu.integer' => 'Suhu harus berupa bilangan bulat.',
             'suhu.between' => 'Suhu harus berada dalam rentang -99 hingga 99.',
         ];

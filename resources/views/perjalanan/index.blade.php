@@ -12,7 +12,7 @@
                         Cepat & Mudah
                     </h1>
                     <p class="paragraph mb-30">
-                        Catat Perjalanan Tanpa Batas, Cepat, dan <br>Mudah Bersama Layanan Kami!
+                        Hi <b>{{ Auth::user()->nama }}</b> Ayo buat cacatan perjalanan yang baru <br>Mudah Bersama Layanan Kami!
 
                     </p>
                     <p class="mb-50"><a href="{{ route('catatan.create') }}" class="btn btn-primary">Buat Catatan
@@ -27,22 +27,14 @@
                                 Catatan
                             </p>
                         </div>
-                        <div class="col-lg-4 item">
-                            <h3 class="big-header">
-                                Welcome
-                            </h3>
-                            <p class="paragraph">
-                                {{ Auth::user()->nama }}
-                            </p>
-                        </div>
-                        <div class="col-lg-4 item">
+                        {{-- <div class="col-lg-4 item">
                             <h3 class="big-header">
                                 Email
                             </h3>
                             <p class="paragraph">
                                 {{ Auth::user()->email }}
                             </p>
-                        </div>
+                        </div> --}}
                     </div>
                 </div>
                 <div class="col-lg-6">
