@@ -109,7 +109,7 @@
                                         {{ $item->nama }}
                                     </h3>
                                 </a>
-                                <div class="footer">
+                                <div class="data">
                                     <div class="location d-flex flex-row ">
                                         <img src="{{ asset('images/ic_loc.svg') }}" height="20" alt="">
                                         <p class="small-paragraph mb-0">
@@ -118,12 +118,12 @@
                                             @endisset
                                         </p>
                                     </div>
-                                    <div class="price">
+                                    <div class="tanggal" style="float: right; color: #0111FF; font-weight: 700;">
                                         <p class="mb-0">
                                             {{ $item->tanggal }}
-
                                         </p>
                                     </div>
+                                    
                                     <div class="clear"></div>
                                 </div>
                             </div>

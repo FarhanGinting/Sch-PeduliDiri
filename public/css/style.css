@@ -214,14 +214,19 @@ transition: all 0.3s ease;
     font-weight: var(--fwbold);
 }
 
-.footerweb {
-    background-color: #FFFFFF;
-    text-align: center;
-    padding: 1rem;
-    position: sticky;
-    bottom: 0;
-    width: 100%;
+.best-items .item .info .data .location {
+    float: left; 
 }
+
+.best-items .item .info .data .tanggal {
+    float: right; 
+}
+
+.best-items .item .info .data .tanggal {
+    color: var(--blue);
+    font-weight: var(--fwbold);
+}
+
 
 .house-details .header .rating {
     float: right;
