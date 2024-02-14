@@ -12,7 +12,8 @@
                         Cepat & Mudah
                     </h1>
                     <p class="paragraph mb-30">
-                        Hi <b>{{ Auth::user()->nama }}</b> Ayo buat cacatan perjalanan yang baru <br>Mudah Bersama Layanan Kami!
+                        Hi <b>{{ Auth::user()->nama }}</b> Ayo buat cacatan perjalanan yang baru <br>Mudah Bersama Layanan
+                        Kami!
 
                     </p>
                     <p class="mb-50"><a href="{{ route('catatan.create') }}" class="btn btn-primary">Buat Catatan
@@ -21,10 +22,10 @@
                         <div class="col-lg-4 item">
                             <h3 class="big-header">
 
-                                {{ $totalCatatan }}
+                                {{ $totalCatatanTanpaPencarian }}
                             </h3>
                             <p class="paragraph">
-                                Catatan
+                                Catatan Perjalanan
                             </p>
                         </div>
                         {{-- <div class="col-lg-4 item">
@@ -53,7 +54,8 @@
                         Perjalanan Anda
                     </h3>
                     <p class="paragraph">
-                        Data perjalanan Anda akan aman dan tersimpan selamanya. Jaga kenangan perjalanan Anda dengan menyimpan data perjalanan Anda dengan aman dan terjamin.
+                        Data perjalanan Anda akan aman dan tersimpan selamanya. Jaga kenangan perjalanan Anda dengan
+                        menyimpan data perjalanan Anda dengan aman dan terjamin.
                     </p>
                 </div>
             </div>
@@ -63,6 +65,14 @@
                         <input type="text" class="form-control" name="keyword" placeholder="Nama, Lokasi, Tanggal">
                         <button class="input-group-text btn btn-warning">🔍</button>
                     </div>
+                    @if (isset($keyword))
+                        @if ($totalCatatan > 0)
+                            <strong class="m-5 text text-success">Data yang ditemukan ada: {{ $totalCatatan }}</strong>
+                        @else
+                            <strong class="m-5 text text-danger">Data Tidak Ada</strong>
+                        @endif
+                    @endif
+
                     @if (Session::has('status'))
                         <!-- Modal -->
                         <div class="modal fade" id="statusModal" tabindex="-1" aria-labelledby="statusModalLabel"
@@ -76,7 +86,7 @@
                                     </div>
                                     <div class="modal-body text-center">
                                         {{ Session::get('message') }}
-                                            <img src="images/double-check.gif" alt="Alert GIF" width="65%" class="mx-auto">
+                                        <img src="images/double-check.gif" alt="Alert GIF" width="65%" class="mx-auto">
                                     </div>
                                     <div class="modal-footer">
                                         <button type="button" class="btn btn-secondary"
@@ -123,7 +133,7 @@
                                             {{ $item->tanggal }}
                                         </p>
                                     </div>
-                                    
+
                                     <div class="clear"></div>
                                 </div>
                             </div>

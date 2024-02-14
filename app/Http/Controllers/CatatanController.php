@@ -27,25 +27,29 @@ class CatatanController extends Controller
     
         // Mengambil catatan perjalanan berdasarkan nik pengguna yang login
         $keyword = $request->keyword;
-        $totalCatatan = Catatan::where('user_id', $user->nik)
-            ->where(function ($query) use ($keyword) {
-                $query->where('nama', 'LIKE', '%' . $keyword . '%')
-                    ->orWhere('lokasi', 'LIKE', '%' . $keyword . '%')
-                    ->orWhere('tanggal', 'LIKE', '%' . $keyword . '%');
-            })
-            ->count();
     
-        $catatan = Catatan::where('user_id', $user->nik)
+        // Menghitung total catatan tanpa mempertimbangkan pencarian
+        $totalCatatanTanpaPencarian = Catatan::where('user_id', $user->nik)->count();
+    
+        $query = Catatan::where('user_id', $user->nik)
             ->where(function ($query) use ($keyword) {
                 $query->where('nama', 'LIKE', '%' . $keyword . '%')
                     ->orWhere('lokasi', 'LIKE', '%' . $keyword . '%')
                     ->orWhere('tanggal', 'LIKE', '%' . $keyword . '%');
-            })
-            ->get();
+            });
+    
+        $totalCatatan = $query->count();
+        $catatan = $query->get();
     
         // Mengirimkan data catatan ke view
-        return view('perjalanan.index', ['catatanList' => $catatan, 'keyword' => $keyword, 'totalCatatan' => $totalCatatan]);
+        return view('perjalanan.index', [
+            'catatanList' => $catatan,
+            'keyword' => $keyword,
+            'totalCatatan' => $totalCatatan,
+            'totalCatatanTanpaPencarian' => $totalCatatanTanpaPencarian,
+        ]);
     }
+
     
 
     public function exportPdf()

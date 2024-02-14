@@ -63,7 +63,7 @@
                             </div>
 
                             <div class="col-12">
-                                <label class="form-label">Suhu °C</label>
+                                <label class="form-label">Suhu °C (Lokasi)</label>
                                 <input type="number" name="suhu"
                                     class="form-control form-control {{ $errors->has('suhu') ? 'is-invalid' : '' }}" id="suhu" value="{{ old('suhu') ?: '' }}"
                                     required>

@@ -48,7 +48,7 @@
                                 <div class="col-lg-6">
                                     <div class="info">
                                         <h3 class="small-header mt-4">
-                                            Suhu Perjalanan : {{ $catatanDetail->suhu }} °C
+                                            Suhu Lokasi : {{ $catatanDetail->suhu }} °C
                                         </h3>
                                     </div>
                                 </div>
