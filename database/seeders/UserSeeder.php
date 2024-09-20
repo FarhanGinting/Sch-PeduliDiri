@@ -5,6 +5,7 @@ namespace Database\Seeders;
 use App\Models\User;
 use Illuminate\Support\Carbon;
 use Illuminate\Database\Seeder;
+use Illuminate\Support\Facades\Hash;
 
 
 class UserSeeder extends Seeder
@@ -14,18 +15,21 @@ class UserSeeder extends Seeder
      */
     public function run(): void
     {
-        $data = [
-            ['nama' => 'aiu', 'foto' => 'Foto Aiu'],
-            ['nama' => 'budi', 'foto' => 'Foto Budi'],
-        ];
+        User::create([
+            'nik' => 1001001,
+            'email' => 'userone@example.com',
+            'password' => Hash::make('password123'), // Enkripsi password
+            'nama' => 'Budi Yanto',
+            'foto' => '-',
+        ]);
 
-        foreach ($data as $value) {
-            User::insert([
-                'nama' => $value['nama'],
-                'foto' => $value['foto'],
-                'created_at' => Carbon::now(),
-                'updated_at' => Carbon::now()
-            ]);
-        }
+        // Membuat akun kedua dengan role_id = 2
+        User::create([
+            'nik' => 1001002,
+            'email' => 'usertwo@example.com',
+            'password' => Hash::make('password456'), // Enkripsi password
+            'nama' => 'Ahmad Dhani',
+            'foto' => '-',
+        ]);
     }
 }
